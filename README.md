@@ -13,6 +13,16 @@
 
 ` python -m venv venv`
 
-4. Install required pip modules
+4. Activate virtual environment
+On Windows:
+
+```
+Set-ExecutionPolicy Unrestricted -Scope Process
+.\venv\Scripts\activate
+```
+
+On Mac:
+
+5. Install required pip modules
 
 ` pip install -r requirements.txt`
