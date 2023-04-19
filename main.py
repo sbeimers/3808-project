@@ -148,14 +148,17 @@ while (running):
             elif increase_bet.collidepoint(event.pos):
                 if game_state == "betting" and bet < 5:
                     bet += 1
+                    bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
                 print("Increase bet clicked")
             elif decrease_bet.collidepoint(event.pos):
                 if game_state == "betting" and bet > 1:
                     bet -= 1
+                    bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
                 print("Decrease bet clicked")
             elif deal.collidepoint(event.pos):
                 if game_state == "betting":
                     credits -= bet
+                    credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
                     # create deck
                     deck = create_new_deck()
 
@@ -201,6 +204,14 @@ while (running):
                     print(payout)
 
                     credits += payout
+                    credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
+
+                    held1.set_alpha(0)
+                    held2.set_alpha(0)
+                    held3.set_alpha(0)
+                    held4.set_alpha(0)
+                    held5.set_alpha(0)
+
                     game_state = "betting"
                 print("Deal clicked")
     # do button clicking until deal button is clicked
