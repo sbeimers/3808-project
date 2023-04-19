@@ -30,6 +30,9 @@ payoutTable = {
 bet = 1 #goes from 1-5
 credits = 1000
 
+# Initialize Pygame
+pygame.init()
+
 # Set up the display
 screen = pygame.display.set_mode((1254, 700))
 pygame.display.set_caption("Video Poker")
@@ -142,12 +145,15 @@ while (running):
     # print("PAYOUTTT:")
     # print(payout)
 
+
+    # uncomment these once loop isn't infinite:
+    ############################################### 
     # check payout table
-    payouthand = [payoutTable[value]]
-    print (hand)
-    print (payouthand)
-    payout = payouthand[0][bet]
+    # payouthand = [payoutTable[value]]
+    # print (hand)
+    # print (payouthand)
+    # payout = payouthand[0][bet]
 
-    print("PAYOUTTT:")
-    print(payout)
-
+    # print("PAYOUTTT:")
+    # print(payout)
+    ############################################### 
