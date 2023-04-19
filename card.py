@@ -35,4 +35,3 @@ class Card:
             case "S":
                 file_name += "spades"
         file_name += ".png"
-            
