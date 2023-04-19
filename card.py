@@ -35,5 +35,4 @@ class Card:
             case "S":
                 file_name += "spades"
         file_name += ".png"
-        print('hi', file_name)
         return file_name
