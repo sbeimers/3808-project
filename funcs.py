@@ -84,6 +84,6 @@ def check_pair(hand):
     value_counts = defaultdict(lambda:0)
     for v in values:
         value_counts[v]+=1
-    print (value_counts)
+    # print (value_counts)
     return ((value_counts[11] == 2 or value_counts[12] == 2 or value_counts[13] == 2 or value_counts[14] == 2))
 
