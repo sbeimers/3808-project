@@ -4,10 +4,31 @@ from card import Card
 import funcs as funcs
 import random
 
-payouttableDict = {1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 6, 7: 9, 8: 25, 9: 50, 10: 250}
+payoutTable = { 
+    1: 
+    {1: 0, 2: 0, 3: 0, 4: 0, 5: 0},
+    2:
+    {1: 1, 2: 2, 3: 3, 4: 4, 5: 5},
+    3:
+    {1: 2, 2: 4, 3: 6, 4: 8, 5: 10},
+    4:
+    {1: 3, 2: 6, 3: 9, 4: 12, 5: 15},
+    5:
+    {1: 4, 2: 8, 3: 12, 4: 16, 5: 20},
+    6:
+    {1: 6, 2: 12, 3: 18, 4: 24, 5: 30},
+    7:
+    {1: 9, 2: 18, 3: 27, 4: 36, 5: 45},
+    8:
+    {1: 25, 2: 50, 3: 75, 4: 100, 5: 125},
+    9:
+    {1: 50, 2: 100, 3: 150, 4: 200, 5: 250},
+    10:
+    {1: 250, 2: 500, 3: 750, 4: 1000, 5: 4000}
+}
 
-# Initialize Pygame
-pygame.init()
+bet = 1 #goes from 1-5
+credits = 1000
 
 # Set up the display
 screen = pygame.display.set_mode((1254, 700))
@@ -74,6 +95,7 @@ while (running):
                 print("Button 4 clicked")
             elif hold5.collidepoint(event.pos):
                 print("Button 5 clicked")
+    # do button clicking until deal button is clicked
 
     # Clear the screen
     screen.fill((255, 255, 255))
@@ -120,6 +142,12 @@ while (running):
     # print("PAYOUTTT:")
     # print(payout)
 
+    # check payout table
+    payouthand = [payoutTable[value]]
+    print (hand)
+    print (payouthand)
+    payout = payouthand[0][bet]
 
+    print("PAYOUTTT:")
+    print(payout)
 
-    # print(funcs.check_hand(hand))
