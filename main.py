@@ -70,6 +70,13 @@ held3 = font.render("HELD", True, (255, 255, 255))
 held4 = font.render("HELD", True, (255, 255, 255))
 held5 = font.render("HELD", True, (255, 255, 255))
 
+# 2 lables for bet + and bet -
+bet_plus = font.render("Bet Up", True, (255, 255, 255))
+bet_minus = font.render("Bet Down", True, (255, 255, 255))
+
+# 1 label for deal
+deal_label = font.render("Deal", True, (255, 255, 255))
+
 # Make transparent
 held1.set_alpha(0)
 held2.set_alpha(0)
@@ -80,9 +87,9 @@ held5.set_alpha(0)
 credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
 bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
 
-increase_bet = pygame.Rect(100, 600, 100, 50)
-decrease_bet = pygame.Rect(250, 600, 100, 50)
-deal = pygame.Rect(400, 600, 100, 50)
+increase_bet = pygame.Rect(45, 587, 200, 50)
+decrease_bet = pygame.Rect(45, 637, 200, 50)
+deal = pygame.Rect(300, 610, 150, 50)
 
 def create_new_deck():
     deck = []
@@ -244,12 +251,15 @@ while (running):
     screen.blit(held3, (584, 150))
     screen.blit(held4, (832, 150))
     screen.blit(held5, (1080, 150))
+    screen.blit(bet_plus, (80, 587))
+    screen.blit(bet_minus, (55, 637))
+    screen.blit(deal_label, (330, 610))
 
     # Draw credit label
-    screen.blit(credit_label, (100, 100))
+    screen.blit(credit_label, (1000, 587))
 
     # Draw bet label
-    screen.blit(bet_label, (100, 150))
+    screen.blit(bet_label, (1000, 637))
 
 
     pygame.display.flip()
