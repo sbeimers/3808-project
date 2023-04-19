@@ -30,6 +30,11 @@ payoutTable = {
 bet = 1 #goes from 1-5
 credits = 1000
 
+# game states: betting, first_hand
+# betting -> no holding, can bet, can deal
+# first_hand -> can hold, cannot bet, can deal
+
+
 # Initialize Pygame
 pygame.init()
 
@@ -57,9 +62,10 @@ hold3 = pygame.Rect(502, 200, 250, 363)
 hold4 = pygame.Rect(752, 200, 250, 363)
 hold5 = pygame.Rect(1002, 200, 250, 363)
 
-increase_bet = pygame.Rect(100, 500, 100, 50)
-decrease_bet = pygame.Rect(250, 500, 100, 50)
-deal = pygame.Rect(400, 500, 100, 50)
+# Load deal and bet buttons
+increase_bet = pygame.Rect(100, 600, 100, 50)
+decrease_bet = pygame.Rect(250, 600, 100, 50)
+deal = pygame.Rect(400, 600, 100, 50)
 
 def create_new_deck():
     deck = []
@@ -98,6 +104,12 @@ while (running):
                 print("Button 4 clicked")
             elif hold5.collidepoint(event.pos):
                 print("Button 5 clicked")
+            elif increase_bet.collidepoint(event.pos):
+                print("Increase bet clicked")
+            elif decrease_bet.collidepoint(event.pos):
+                print("Decrease bet clicked")
+            elif deal.collidepoint(event.pos):
+                print("Deal clicked")
     # do button clicking until deal button is clicked
 
     # Clear the screen
@@ -111,6 +123,9 @@ while (running):
     pygame.draw.rect(screen, (0, 0, 0), hold3)
     pygame.draw.rect(screen, (0, 0, 0), hold4)
     pygame.draw.rect(screen, (0, 0, 0), hold5)
+    pygame.draw.rect(screen, (0, 255, 0), increase_bet)
+    pygame.draw.rect(screen, (255, 0, 0), decrease_bet)
+    pygame.draw.rect(screen, (0, 0, 255), deal)
 
     # Draw images
     screen.blit(card_image_1, (2, 200))
