@@ -54,7 +54,7 @@ card_image_4 = pygame.transform.scale(pygame.image.load("card_images/red_joker.p
 card_image_5 = pygame.transform.scale(pygame.image.load("card_images/red_joker.png"), (250, 363))
 
 # Load font
-font = pygame.font.SysFont("Arial", 20)
+font = pygame.font.SysFont("Arial", 40)
 
 # Load 5 buttons
 hold1 = pygame.Rect(2, 200, 250, 363)
@@ -63,10 +63,26 @@ hold3 = pygame.Rect(502, 200, 250, 363)
 hold4 = pygame.Rect(752, 200, 250, 363)
 hold5 = pygame.Rect(1002, 200, 250, 363)
 
-# Load deal and bet buttons
-increase_bet = pygame.Rect(100, 600, 100, 50)
-decrease_bet = pygame.Rect(250, 600, 100, 50)
-deal = pygame.Rect(400, 600, 100, 50)
+# 5 labels for text
+held1 = font.render("HELD", True, (255, 255, 255, 0))
+held2 = font.render("HELD", True, (255, 255, 255))
+held3 = font.render("HELD", True, (255, 255, 255))
+held4 = font.render("HELD", True, (255, 255, 255))
+held5 = font.render("HELD", True, (255, 255, 255))
+
+# Make transparent
+held1.set_alpha(0)
+held2.set_alpha(0)
+held3.set_alpha(0)
+held4.set_alpha(0)
+held5.set_alpha(0)
+
+credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
+bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
+
+increase_bet = pygame.Rect(100, 500, 100, 50)
+decrease_bet = pygame.Rect(250, 500, 100, 50)
+deal = pygame.Rect(400, 500, 100, 50)
 
 def create_new_deck():
     deck = []
@@ -190,6 +206,20 @@ while (running):
     screen.blit(card_image_3, (502, 200))
     screen.blit(card_image_4, (752, 200))
     screen.blit(card_image_5, (1002, 200))
+
+    # Draw labels
+    screen.blit(held1, (88, 150))
+    screen.blit(held2, (336, 150))
+    screen.blit(held3, (584, 150))
+    screen.blit(held4, (832, 150))
+    screen.blit(held5, (1080, 150))
+
+    # Draw credit label
+    screen.blit(credit_label, (100, 100))
+
+    # Draw bet label
+    screen.blit(bet_label, (100, 150))
+
 
     pygame.display.flip()
 
