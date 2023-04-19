@@ -56,12 +56,7 @@ def check_full_house(hand):
     return False
 
 def check_flush(hand):
-    # for i in range (1,3):
-    #     if hand[i].suit != hand[0].suit:
-    #         return False
-    # return True
     return hand[0].suit == hand[1].suit == hand[2].suit == hand[3].suit == hand[4].suit
-    # return False
 
 def check_straight(hand):
     values = [i.value for i in hand]
@@ -89,6 +84,6 @@ def check_pair(hand):
     value_counts = defaultdict(lambda:0)
     for v in values:
         value_counts[v]+=1
-    return 2 in value_counts.values()
-
+    print (value_counts)
+    return ((value_counts[11] == 2 or value_counts[12] == 2 or value_counts[13] == 2 or value_counts[14] == 2))
 
