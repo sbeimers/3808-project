@@ -3,15 +3,15 @@
 ## Setup
 1. Clone project
 
-` git clone https://github.com/sbeimers/3808-project.git`
+`git clone https://github.com/sbeimers/3808-project.git`
 
 2. Change directory
 
-` cd 3808-project`
+`cd 3808-project`
 
 3. Setup virtual environment with Python
 
-` python -m venv venv`
+`python -m venv venv`
 
 4. Activate virtual environment
 On Windows:
@@ -25,4 +25,4 @@ On Mac:
 
 5. Install required pip modules
 
-` pip install -r requirements.txt`
+`pip install -r requirements.txt`

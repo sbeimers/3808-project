@@ -6,7 +6,6 @@ from card import Card
 def check_hand(hand):
     # sorts from Ace to 2
     hand.sort()
-    print('ook', hand)
     if check_royal_flush(hand):
         return 10
     if check_straight_flush(hand):
