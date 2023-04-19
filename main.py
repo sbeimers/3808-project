@@ -80,9 +80,9 @@ held5.set_alpha(0)
 credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
 bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
 
-increase_bet = pygame.Rect(100, 500, 100, 50)
-decrease_bet = pygame.Rect(250, 500, 100, 50)
-deal = pygame.Rect(400, 500, 100, 50)
+increase_bet = pygame.Rect(100, 600, 100, 50)
+decrease_bet = pygame.Rect(250, 600, 100, 50)
+deal = pygame.Rect(400, 600, 100, 50)
 
 def create_new_deck():
     deck = []
@@ -102,28 +102,48 @@ while (running):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if hold1.collidepoint(event.pos):
                 if game_state == "first_hand":
-                    held[0] = 1 if held[0] == 0 else 0   
-                    #add the ui the show that its held 
+                    if held[0] == 0:
+                        held[0] = 1
+                        held1.set_alpha(255)
+                    else:
+                        held[0] = 0
+                        held1.set_alpha(0)
                 print("Button 1 clicked")
             elif hold2.collidepoint(event.pos):
                 if game_state == "first_hand":
-                    held[1] = 1 if held[1] == 0 else 0   
-                    #add the ui the show that its held 
+                    if held[1] == 0:
+                        held[1] = 1
+                        held2.set_alpha(255)
+                    else:
+                        held[1] = 0
+                        held2.set_alpha(0) 
                 print("Button 2 clicked")
             elif hold3.collidepoint(event.pos):
                 if game_state == "first_hand":
-                    held[2] = 1 if held[2] == 0 else 0   
-                    #add the ui the show that its held 
+                    if held[2] == 0:
+                        held[2] = 1
+                        held3.set_alpha(255)
+                    else:
+                        held[2] = 0
+                        held3.set_alpha(0)
                 print("Button 3 clicked")
             elif hold4.collidepoint(event.pos):
                 if game_state == "first_hand":
-                    held[3] = 1 if held[3] == 0 else 0   
-                    #add the ui the show that its held 
+                    if held[3] == 0:
+                        held[3] = 1
+                        held4.set_alpha(255)
+                    else:
+                        held[3] = 0
+                        held4.set_alpha(0) 
                 print("Button 4 clicked")
             elif hold5.collidepoint(event.pos):
                 if game_state == "first_hand":
-                    held[4] = 1 if held[4] == 0 else 0   
-                    #add the ui the show that its held 
+                    if held[4] == 0:
+                        held[4] = 1
+                        held5.set_alpha(255)
+                    else:
+                        held[4] = 0
+                        held5.set_alpha(0)
                 print("Button 5 clicked")
             elif increase_bet.collidepoint(event.pos):
                 if game_state == "betting" and bet < 5:
