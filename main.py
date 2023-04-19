@@ -53,7 +53,7 @@ card_image_4 = pygame.transform.scale(pygame.image.load("card_images/red_joker.p
 card_image_5 = pygame.transform.scale(pygame.image.load("card_images/red_joker.png"), (250, 363))
 
 # Load font
-font = pygame.font.SysFont("Arial", 40)
+font = pygame.font.SysFont("Arial", 20)
 
 # Load 5 buttons
 hold1 = pygame.Rect(2, 200, 250, 363)
