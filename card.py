@@ -14,7 +14,7 @@ class Card:
     def file_name(self) -> str:
         file_name = ""
         match self.value:
-            case [2,3,4,5,6,7,8,9,10]:
+            case 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10:
                 file_name += str(self.value)
             case 11:
                 file_name += "jack"
@@ -35,3 +35,4 @@ class Card:
             case "S":
                 file_name += "spades"
         file_name += ".png"
+        return file_name

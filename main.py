@@ -29,6 +29,7 @@ payoutTable = {
 
 bet = 1 #goes from 1-5
 credits = 1000
+game_state = "betting"
 
 # game states: betting, first_hand
 # betting -> no holding, can bet, can deal
@@ -76,18 +77,7 @@ def create_new_deck():
 
 running = True
 while (running):
-    # create deck
-    deck = create_new_deck()
-
-    # shuffle deck
-    random.shuffle(deck)
-
-    # deal 5 cards
-    hand = []
-    for i in range(5):
-        hand.append(deck.pop())
-    held = [0,0,0,0,0]
-
+    
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -95,20 +85,87 @@ while (running):
         # Handle button clicks
         if event.type == pygame.MOUSEBUTTONDOWN:
             if hold1.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    held[0] = 1 if held[0] == 0 else 0   
+                    #add the ui the show that its held 
                 print("Button 1 clicked")
             elif hold2.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    held[1] = 1 if held[1] == 0 else 0   
+                    #add the ui the show that its held 
                 print("Button 2 clicked")
             elif hold3.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    held[2] = 1 if held[2] == 0 else 0   
+                    #add the ui the show that its held 
                 print("Button 3 clicked")
             elif hold4.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    held[3] = 1 if held[3] == 0 else 0   
+                    #add the ui the show that its held 
                 print("Button 4 clicked")
             elif hold5.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    held[4] = 1 if held[4] == 0 else 0   
+                    #add the ui the show that its held 
                 print("Button 5 clicked")
             elif increase_bet.collidepoint(event.pos):
+                if game_state == "betting" and bet < 5:
+                    bet += 1
                 print("Increase bet clicked")
             elif decrease_bet.collidepoint(event.pos):
+                if game_state == "betting" and bet > 1:
+                    bet -= 1
                 print("Decrease bet clicked")
             elif deal.collidepoint(event.pos):
+                if game_state == "betting":
+                    credits -= bet
+                    # create deck
+                    deck = create_new_deck()
+
+                    # shuffle deck
+                    random.shuffle(deck)
+
+                    # deal 5 cards
+                    hand = []
+                    for i in range(5):
+                        hand.append(deck.pop())
+                    held = [0,0,0,0,0]
+                    card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
+                    card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
+                    card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
+                    card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
+                    card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
+                    
+                    game_state = "first_hand"
+                else:
+                    # hold cards
+                    for i in range(5):
+                        if held[i] == 0:
+                            hand[i] = deck.pop()
+                    print(hand[0])
+                    card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
+                    card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
+                    card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
+                    card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
+                    card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
+                    
+                    
+                    # calculate hand value
+                    value = funcs.check_hand(hand)
+
+
+                    # check payout table
+                    payouthand = [payoutTable[value]]
+                    print (hand)
+                    print (payouthand)
+                    payout = payouthand[0][bet]
+
+                    print("PAYOUTTT:")
+                    print(payout)
+
+                    credits += payout
+                    game_state = "betting"
                 print("Deal clicked")
     # do button clicking until deal button is clicked
 
