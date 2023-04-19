@@ -25,4 +25,7 @@ On Mac:
 
 5. Install required pip modules
 
+`source venv/bin/activate`
+
+
 `pip install -r requirements.txt`
