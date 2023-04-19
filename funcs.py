@@ -26,6 +26,29 @@ def check_hand(hand):
         return 2
     return 1
 
+def convertNumberToWinner(x):
+    if x == 1:
+        return "Lose"
+    if x == 2:
+        return "Win: Pair"
+    if x == 3:
+        return "Win: Two Pair"
+    if x == 4:
+        return "Win: 3 of a Kind"
+    if x == 5:
+        return "Win: Straight"
+    if x == 6:
+        return "Win: Flush"
+    if x == 7:
+        return "Win: Full House"
+    if x == 8:
+        return "Win: 4 of a Kind"
+    if x == 9:
+        return "Win: Straight Flush"
+    if x == 10:
+        return "Win: Royal Flush"
+
+
 
 # given a hand of 5 cards, determine if it is a royal flush
 def check_royal_flush (hand):
