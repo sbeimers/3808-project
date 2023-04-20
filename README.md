@@ -5,7 +5,7 @@
 
 <p align="center">
   <h2 align="center">MATH 3808 Team Project(Winter 2023)</h2>
-  <h3 align="center">Jacks and Better, Video Poker Simulator</h3>
+  <h3 align="center">Jacks or Better, Video Poker Simulator</h3>
     <br />
 
 ## About The Project
