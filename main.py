@@ -90,6 +90,9 @@ bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
 increase_bet = pygame.Rect(45, 587, 200, 50)
 decrease_bet = pygame.Rect(45, 637, 200, 50)
 deal = pygame.Rect(300, 610, 150, 50)
+win_label = font.render("Winner Label", True, (255, 255, 255))
+win_label.set_alpha(0)
+
 
 def create_new_deck():
     deck = []
@@ -183,6 +186,7 @@ while (running):
                     card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
                     card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
                     
+                    win_label.set_alpha(0)
                     game_state = "first_hand"
                 else:
                     # hold cards
@@ -219,6 +223,9 @@ while (running):
                     held4.set_alpha(0)
                     held5.set_alpha(0)
 
+                    win_label.set_alpha(255)
+                    win_label = font.render(funcs.convertNumberToWinner(value), True, (255, 255, 255))
+
                     game_state = "betting"
                 print("Deal clicked")
     # do button clicking until deal button is clicked
@@ -254,6 +261,7 @@ while (running):
     screen.blit(bet_plus, (80, 587))
     screen.blit(bet_minus, (55, 637))
     screen.blit(deal_label, (330, 610))
+    screen.blit(win_label, (500, 600))
 
     # Draw credit label
     screen.blit(credit_label, (1000, 587))
