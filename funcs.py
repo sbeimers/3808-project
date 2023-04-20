@@ -59,53 +59,62 @@ def check_royal_flush (hand):
 def check_straight_flush (hand):
     return check_flush(hand) and check_straight(hand)
 
+# given a hand of 5 cards, determine if it is a four of a kind
 def check_four_of_a_kind(hand):
     values = [i.value for i in hand]
     value_counts = defaultdict(lambda:0)
     for v in values:
         value_counts[v]+=1
-    if sorted(value_counts.values()) == [1,4]:
-        return True
-    return False
+    # check if there are only two different values, and one of them has a count of 4
+    return sorted(value_counts.values()) == [1,4]
 
+# given a hand of 5 cards, determine if it is a full house
 def check_full_house(hand):
     values = [i.value for i in hand]
     value_counts = defaultdict(lambda:0)
     for v in values:
         value_counts[v]+=1
-    if sorted(value_counts.values()) == [2,3]:
-        return True
-    return False
+    # check if there are only two different values, and they have counts of 2 and 3
+    return sorted(value_counts.values()) == [2,3]
 
+# given a hand of 5 cards, determine if it is a flush
 def check_flush(hand):
+    # check if all suits are the same
     return hand[0].suit == hand[1].suit == hand[2].suit == hand[3].suit == hand[4].suit
 
+# given a hand of 5 cards, determine if it is a straight
 def check_straight(hand):
     values = [i.value for i in hand]
+    # if there is no ace, then the straight is just 5 in a row
     if values[0] != 14:
         return values[1] == values[0]-1 and values[2] == values[1]-1 and values[3] == values[2]-1 and values[4] == values[3]-1
-    else:
-        return (values[1] == 2 and values[2] == 3 and values[3] == 4 and values[4]) == 5 or (values[1] == 13 and values[2] == 12 and values[3] == 11 and values[4] == 10)
+    else: # if there is an ace, then the straight is either 14,5,4,3,2 or 14,13,12,11,10
+        return (values[1] == 5 and values[2] == 4 and values[3] == 3 and values[4]) == 2 or (values[1] == 13 and values[2] == 12 and values[3] == 11 and values[4] == 10)
 
+# given a hand of 5 cards, determine if it is a three of a kind
 def check_three_of_a_kind(hand):
     values = [i.value for i in hand]
     value_counts = defaultdict(lambda:0)
     for v in values:
         value_counts[v]+=1
+    # check if there are exactly three different values, and one of them has a count of 3
     return set(value_counts.values()) == set([3,1])
 
+# given a hand of 5 cards, determine if it is a two pair
 def check_two_pair(hand):
     values = [i.value for i in hand]
     value_counts = defaultdict(lambda:0)
     for v in values:
         value_counts[v]+=1
+    # check if there are exactly three different values, and two of them have a count of 2
     return sorted(value_counts.values())==[1,2,2]
 
+# given a hand of 5 cards, determine if it is a pair
 def check_pair(hand):
     values = [i.value for i in hand]
     value_counts = defaultdict(lambda:0)
     for v in values:
         value_counts[v]+=1
-    # print (value_counts)
+    # since pair is only valid from jack to ace, check if there are two of any of those values
     return ((value_counts[11] == 2 or value_counts[12] == 2 or value_counts[13] == 2 or value_counts[14] == 2))
 
