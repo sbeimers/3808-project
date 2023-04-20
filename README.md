@@ -10,7 +10,7 @@
 
 ## About The Project
 
-This project was created by Sebasion Beimers, Elias Hawa and Victor Li for Carleton University's MATH 3808 Winter 2023 course, taught by Jason Gao. The project is a video poker simulator that allows the user to play Jacks or Better video poker. 
+This project was created by Sebastian Beimers, Elias Hawa and Victor Li for Carleton University's MATH 3808 Winter 2023 course, taught by Jason Gao. The project is a video poker simulator that allows the user to play Jacks or Better video poker. 
 
 ### Built With
 * [Python](https://www.python.org/)
@@ -59,10 +59,9 @@ pip install -r requirements.txt
 python main.py
 ```
 
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield1]: https://img.shields.io/static/v1?label=Contributor&message=Elias_Hawa&color=afff75&style=for-the-badge
 [contributors-url1]: https://github.com/EliasJRH
-[contributors-shield2]: https://img.shields.io/static/v1?label=Contributor&message=Sebastion_Beimers&color=afff75&style=for-the-badge
+[contributors-shield2]: https://img.shields.io/static/v1?label=Contributor&message=Sebastian_Beimers&color=afff75&style=for-the-badge
 [contributors-url2]: https://github.com/sbeimers
 [contributors-shield3]: https://img.shields.io/static/v1?label=Contributor&message=Victor_Li&color=afff75&style=for-the-badge
 [contributors-url3]: https://github.com/VictorLi5611
