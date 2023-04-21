@@ -32,6 +32,8 @@ payoutTable = {
 
 bet = 1 #goes from 1-5
 credits = 1000
+held = [0,0,0,0,0]
+hand = []
 game_state = "betting"
 
 # game states: betting, first_hand
@@ -59,18 +61,11 @@ card_image_5 = pygame.transform.scale(pygame.image.load("card_images/red_joker.p
 font = pygame.font.SysFont("Arial", 40)
 
 # Load 5 buttons
-hold1 = pygame.Rect(2, 200, 250, 363)
-hold2 = pygame.Rect(252, 200, 250, 363)
-hold3 = pygame.Rect(502, 200, 250, 363)
-hold4 = pygame.Rect(752, 200, 250, 363)
-hold5 = pygame.Rect(1002, 200, 250, 363)
-
-# 5 labels for text
-held1 = font.render("HELD", True, (255, 255, 255, 0))
-held2 = font.render("HELD", True, (255, 255, 255))
-held3 = font.render("HELD", True, (255, 255, 255))
-held4 = font.render("HELD", True, (255, 255, 255))
-held5 = font.render("HELD", True, (255, 255, 255))
+card_rect_1 = pygame.Rect(2, 200, 250, 363)
+card_rect_2 = pygame.Rect(252, 200, 250, 363)
+card_rect_3 = pygame.Rect(502, 200, 250, 363)
+card_rect_4 = pygame.Rect(752, 200, 250, 363)
+card_rect_5 = pygame.Rect(1002, 200, 250, 363)
 
 # 2 lables for bet + and bet -
 bet_plus = font.render("Bet Up", True, (255, 255, 255))
@@ -78,13 +73,6 @@ bet_minus = font.render("Bet Down", True, (255, 255, 255))
 
 # 1 label for deal
 deal_label = font.render("Deal", True, (255, 255, 255))
-
-# Make transparent
-held1.set_alpha(0)
-held2.set_alpha(0)
-held3.set_alpha(0)
-held4.set_alpha(0)
-held5.set_alpha(0)
 
 credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
 bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
@@ -178,28 +166,33 @@ def draw_pay_table():
 
 def draw_components():
     # Draw buttons
-    pygame.draw.rect(screen, (0, 0, 0), hold1)
-    pygame.draw.rect(screen, (0, 0, 0), hold2)
-    pygame.draw.rect(screen, (0, 0, 0), hold3)
-    pygame.draw.rect(screen, (0, 0, 0), hold4)
-    pygame.draw.rect(screen, (0, 0, 0), hold5)
+    pygame.draw.rect(screen, (0, 0, 0), card_rect_1)
+    pygame.draw.rect(screen, (0, 0, 0), card_rect_2)
+    pygame.draw.rect(screen, (0, 0, 0), card_rect_3)
+    pygame.draw.rect(screen, (0, 0, 0), card_rect_4)
+    pygame.draw.rect(screen, (0, 0, 0), card_rect_5)
+
     pygame.draw.rect(screen, (0, 255, 0), increase_bet)
     pygame.draw.rect(screen, (255, 0, 0), decrease_bet)
     pygame.draw.rect(screen, (0, 0, 255), deal)
 
     # Draw images
-    screen.blit(card_image_1, (2, 200))
-    screen.blit(card_image_2, (252, 200))
-    screen.blit(card_image_3, (502, 200))
-    screen.blit(card_image_4, (752, 200))
-    screen.blit(card_image_5, (1002, 200))
+    if held[0]: screen.blit(card_image_1, (12, 210))
+    else: screen.blit(card_image_1, (2, 200))
+
+    if held[1]: screen.blit(card_image_2, (262, 210))
+    else: screen.blit(card_image_2, (252, 200))
+    
+    if held[2]: screen.blit(card_image_3, (512, 210))
+    else: screen.blit(card_image_3, (502, 200))
+    
+    if held[3]: screen.blit(card_image_4, (762, 210))
+    else: screen.blit(card_image_4, (752, 200))
+    
+    if held[4]: screen.blit(card_image_5, (1012, 210))
+    else: screen.blit(card_image_5, (1002, 200))
 
     # Draw labels
-    screen.blit(held1, (88, 150))
-    screen.blit(held2, (336, 150))
-    screen.blit(held3, (584, 150))
-    screen.blit(held4, (832, 150))
-    screen.blit(held5, (1080, 150))
     screen.blit(bet_plus, (80, 587))
     screen.blit(bet_minus, (55, 637))
     screen.blit(deal_label, (330, 610))
@@ -226,46 +219,56 @@ while (running):
 
         # Handle button clicks
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if hold1.collidepoint(event.pos):
+            if card_rect_1.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[0] == 0:
                         held[0] = 1
-                        held1.set_alpha(255)
+                        card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (230, 343))
+                        card_rect_1 = pygame.Rect(12, 210, 230, 343)
                     else:
                         held[0] = 0
-                        held1.set_alpha(0)
-            elif hold2.collidepoint(event.pos):
+                        card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
+                        card_rect_1 = pygame.Rect(2, 200, 250, 363)
+            elif card_rect_2.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[1] == 0:
                         held[1] = 1
-                        held2.set_alpha(255)
+                        card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (230, 343))
+                        card_rect_2 = pygame.Rect(262, 210, 230, 343)
                     else:
                         held[1] = 0
-                        held2.set_alpha(0) 
-            elif hold3.collidepoint(event.pos):
+                        card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
+                        card_rect_2 = pygame.Rect(252, 200, 250, 363)
+            elif card_rect_3.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[2] == 0:
                         held[2] = 1
-                        held3.set_alpha(255)
+                        card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (230, 343))
+                        card_rect_3 = pygame.Rect(512, 210, 230, 343)
                     else:
                         held[2] = 0
-                        held3.set_alpha(0)
-            elif hold4.collidepoint(event.pos):
+                        card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
+                        card_rect_3 = pygame.Rect(502, 200, 250, 363)
+            elif card_rect_4.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[3] == 0:
                         held[3] = 1
-                        held4.set_alpha(255)
+                        card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (230, 343))
+                        card_rect_4 = pygame.Rect(762, 210, 230, 343)
                     else:
                         held[3] = 0
-                        held4.set_alpha(0) 
-            elif hold5.collidepoint(event.pos):
+                        card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
+                        card_rect_4 = pygame.Rect(752, 200, 250, 363)
+            elif card_rect_5.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[4] == 0:
                         held[4] = 1
-                        held5.set_alpha(255)
+                        card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (230, 343))
+                        card_rect_5 = pygame.Rect(1012, 210, 230, 343)
                     else:
                         held[4] = 0
-                        held5.set_alpha(0)
+                        card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
+                        card_rect_5 = pygame.Rect(1002, 200, 250, 363)
             elif increase_bet.collidepoint(event.pos):
                 if game_state == "betting" and bet < 5:
                     bet += 1
@@ -302,6 +305,7 @@ while (running):
                     for i in range(5):
                         if held[i] == 0:
                             hand[i] = deck.pop()
+                        held[i] = 0
                     card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
                     card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
                     card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
@@ -319,12 +323,6 @@ while (running):
 
                     credits += payout
                     credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
-
-                    held1.set_alpha(0)
-                    held2.set_alpha(0)
-                    held3.set_alpha(0)
-                    held4.set_alpha(0)
-                    held5.set_alpha(0)
 
                     win_label.set_alpha(255)
                     win_label = font.render(funcs.convertNumberToWinner(value), True, (255, 255, 255))
