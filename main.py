@@ -1,3 +1,6 @@
+# MATH3808 Final Project - Video Poker
+# Authors: Elias Hawa, Sebastian Beimers, Victor Li
+
 import pygame
 
 from card import Card
@@ -92,7 +95,7 @@ deal = pygame.Rect(300, 610, 150, 50)
 win_label = font.render("Winner Label", True, (255, 255, 255))
 win_label.set_alpha(0)
 
-
+# pygame functions to draw the pay table
 def draw_pay_table():
     pygame.draw.rect(screen, (255, 255, 255), (10, 5, 565, 190), 5)
     font = pygame.font.SysFont("Arial", 18)
@@ -173,153 +176,7 @@ def draw_pay_table():
     screen.blit(font.render("10", True, (255, 255, 255)), (552, 150))
     screen.blit(font.render("5", True, (255, 255, 255)), (560, 170))
 
-def create_new_deck():
-    deck = []
-    for suit in ["H", "D", "C", "S"]:
-        for value in range(2, 15): #2-14
-            deck.append(Card(suit, value))
-    return deck
-
-
-running = True
-while (running):
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-        # Handle button clicks
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if hold1.collidepoint(event.pos):
-                if game_state == "first_hand":
-                    if held[0] == 0:
-                        held[0] = 1
-                        held1.set_alpha(255)
-                    else:
-                        held[0] = 0
-                        held1.set_alpha(0)
-                print("Button 1 clicked")
-            elif hold2.collidepoint(event.pos):
-                if game_state == "first_hand":
-                    if held[1] == 0:
-                        held[1] = 1
-                        held2.set_alpha(255)
-                    else:
-                        held[1] = 0
-                        held2.set_alpha(0) 
-                print("Button 2 clicked")
-            elif hold3.collidepoint(event.pos):
-                if game_state == "first_hand":
-                    if held[2] == 0:
-                        held[2] = 1
-                        held3.set_alpha(255)
-                    else:
-                        held[2] = 0
-                        held3.set_alpha(0)
-                print("Button 3 clicked")
-            elif hold4.collidepoint(event.pos):
-                if game_state == "first_hand":
-                    if held[3] == 0:
-                        held[3] = 1
-                        held4.set_alpha(255)
-                    else:
-                        held[3] = 0
-                        held4.set_alpha(0) 
-                print("Button 4 clicked")
-            elif hold5.collidepoint(event.pos):
-                if game_state == "first_hand":
-                    if held[4] == 0:
-                        held[4] = 1
-                        held5.set_alpha(255)
-                    else:
-                        held[4] = 0
-                        held5.set_alpha(0)
-                print("Button 5 clicked")
-            elif increase_bet.collidepoint(event.pos):
-                if game_state == "betting" and bet < 5:
-                    bet += 1
-                    bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
-                print("Increase bet clicked")
-            elif decrease_bet.collidepoint(event.pos):
-                if game_state == "betting" and bet > 1:
-                    bet -= 1
-                    bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
-                print("Decrease bet clicked")
-            elif deal.collidepoint(event.pos):
-                if game_state == "betting":
-                    credits -= bet
-                    credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
-                    # create deck
-                    deck = create_new_deck()
-
-                    # shuffle deck
-                    random.shuffle(deck)
-
-                    # deal 5 cards
-                    hand = []
-                    for i in range(5):
-                        hand.append(deck.pop())
-                    held = [0,0,0,0,0]
-                    card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
-                    card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
-                    card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
-                    card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
-                    card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
-                    
-                    win_label.set_alpha(0)
-                    game_state = "first_hand"
-                else:
-                    # hold cards
-                    for i in range(5):
-                        if held[i] == 0:
-                            hand[i] = deck.pop()
-                    print(hand[0])
-                    card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
-                    card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
-                    card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
-                    card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
-                    card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
-                    
-                    
-                    # calculate hand value
-                    value = funcs.check_hand(hand)
-
-
-                    # check payout table
-                    payouthand = [payoutTable[value]]
-                    print (hand)
-                    print (payouthand)
-                    payout = payouthand[0][bet]
-
-                    print("PAYOUTTT:")
-                    print(payout)
-
-                    credits += payout
-                    credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
-
-                    held1.set_alpha(0)
-                    held2.set_alpha(0)
-                    held3.set_alpha(0)
-                    held4.set_alpha(0)
-                    held5.set_alpha(0)
-
-                    win_label.set_alpha(255)
-                    win_label = font.render(funcs.convertNumberToWinner(value), True, (255, 255, 255))
-
-                    game_state = "betting"
-                print("Deal clicked")
-    # do button clicking until deal button is clicked
-
-    # Clear the screen
-    screen.fill((255, 255, 255))
-
-    screen.blit(background_image, (0, 0))
-
-    # Draw pay scale selector
-    pygame.draw.rect(screen, (128, 0, 32), pygame.Rect(125 + (75 * bet), 5, 75, 190))
-
-    # Draw pay table
-    draw_pay_table()
-
+def draw_components():
     # Draw buttons
     pygame.draw.rect(screen, (0, 0, 0), hold1)
     pygame.draw.rect(screen, (0, 0, 0), hold2)
@@ -354,42 +211,139 @@ while (running):
     # Draw bet label
     screen.blit(bet_label, (1000, 637))
 
+def create_new_deck():
+    deck = []
+    for suit in ["H", "D", "C", "S"]:
+        for value in range(2, 15): #2-14
+            deck.append(Card(suit, value))
+    return deck
+
+running = True
+while (running):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+        # Handle button clicks
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if hold1.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    if held[0] == 0:
+                        held[0] = 1
+                        held1.set_alpha(255)
+                    else:
+                        held[0] = 0
+                        held1.set_alpha(0)
+            elif hold2.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    if held[1] == 0:
+                        held[1] = 1
+                        held2.set_alpha(255)
+                    else:
+                        held[1] = 0
+                        held2.set_alpha(0) 
+            elif hold3.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    if held[2] == 0:
+                        held[2] = 1
+                        held3.set_alpha(255)
+                    else:
+                        held[2] = 0
+                        held3.set_alpha(0)
+            elif hold4.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    if held[3] == 0:
+                        held[3] = 1
+                        held4.set_alpha(255)
+                    else:
+                        held[3] = 0
+                        held4.set_alpha(0) 
+            elif hold5.collidepoint(event.pos):
+                if game_state == "first_hand":
+                    if held[4] == 0:
+                        held[4] = 1
+                        held5.set_alpha(255)
+                    else:
+                        held[4] = 0
+                        held5.set_alpha(0)
+            elif increase_bet.collidepoint(event.pos):
+                if game_state == "betting" and bet < 5:
+                    bet += 1
+                    bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
+            elif decrease_bet.collidepoint(event.pos):
+                if game_state == "betting" and bet > 1:
+                    bet -= 1
+                    bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
+            elif deal.collidepoint(event.pos):
+                if game_state == "betting":
+                    credits -= bet
+                    credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
+                    # create deck
+                    deck = create_new_deck()
+
+                    # shuffle deck
+                    random.shuffle(deck)
+
+                    # deal 5 cards
+                    hand = []
+                    for i in range(5):
+                        hand.append(deck.pop())
+                    held = [0,0,0,0,0]
+                    card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
+                    card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
+                    card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
+                    card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
+                    card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
+                    
+                    win_label.set_alpha(0)
+                    game_state = "first_hand"
+                else:
+                    # hold cards
+                    for i in range(5):
+                        if held[i] == 0:
+                            hand[i] = deck.pop()
+                    card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
+                    card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
+                    card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
+                    card_image_4 = pygame.transform.scale(pygame.image.load("card_images/" + hand[3].file_name()), (250, 363))
+                    card_image_5 = pygame.transform.scale(pygame.image.load("card_images/" + hand[4].file_name()), (250, 363))
+                    
+                    
+                    # calculate hand value
+                    value = funcs.check_hand(hand)
+
+
+                    # check payout table
+                    payouthand = [payoutTable[value]]
+                    payout = payouthand[0][bet]
+
+                    credits += payout
+                    credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
+
+                    held1.set_alpha(0)
+                    held2.set_alpha(0)
+                    held3.set_alpha(0)
+                    held4.set_alpha(0)
+                    held5.set_alpha(0)
+
+                    win_label.set_alpha(255)
+                    win_label = font.render(funcs.convertNumberToWinner(value), True, (255, 255, 255))
+
+                    game_state = "betting"
+    # do button clicking until deal button is clicked
+
+    # Clear the screen
+    screen.fill((255, 255, 255))
+
+    screen.blit(background_image, (0, 0))
+
+    # Draw pay scale selector
+    pygame.draw.rect(screen, (128, 0, 32), pygame.Rect(125 + (75 * bet), 5, 75, 190))
+
+    # Draw pay table
+    draw_pay_table()
+
+    # Draw buttons, images and labels
+    draw_components()
 
     pygame.display.flip()
-
-    # # print hand
-    # print(hand)
-
-    # # do button clicking until deal button is clicked
-
-    # # buttons will just change held array to 1 or 0 at index of card
-
-
-    # # deal new cards
-    # for i in range(5):
-    #     if held[i] == 0:
-    #         hand[i] = deck.pop()
-
-    # # idk ui update based off new chards
-
-
-    # #calculate hand
-    # value = funcs.check_hand(hand)
-
-    # # check payout table
-    # payout = payouttableDict[value]
-    # print("PAYOUTTT:")
-    # print(payout)
-
-
-    # uncomment these once loop isn't infinite:
-    ############################################### 
-    # check payout table
-    # payouthand = [payoutTable[value]]
-    # print (hand)
-    # print (payouthand)
-    # payout = payouthand[0][bet]
-
-    # print("PAYOUTTT:")
-    # print(payout)
-    ############################################### 
