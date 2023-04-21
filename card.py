@@ -7,10 +7,11 @@ class Card:
     value: int 
     # 11 = Jack, 12 = Queen, 13 = King, 14 = Ace
 
-    #define sorting order (Ace is highest card, 2 is lowest)
+    # Define sorting order (Ace is highest card, 2 is lowest)
     def __lt__(self, other):
         return self.value > other.value
     
+    # Return file name for card class
     def file_name(self) -> str:
         file_name = ""
         match self.value:

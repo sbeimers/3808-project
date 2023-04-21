@@ -92,7 +92,7 @@ deal = pygame.Rect(300, 610, 150, 50)
 win_label = font.render("Winner Label", True, (255, 255, 255))
 win_label.set_alpha(0)
 
-
+# pygame functions to draw the pay table
 def draw_pay_table():
     pygame.draw.rect(screen, (255, 255, 255), (10, 5, 565, 190), 5)
     font = pygame.font.SysFont("Arial", 18)
@@ -173,13 +173,47 @@ def draw_pay_table():
     screen.blit(font.render("10", True, (255, 255, 255)), (552, 150))
     screen.blit(font.render("5", True, (255, 255, 255)), (560, 170))
 
+def draw_components():
+    # Draw buttons
+    pygame.draw.rect(screen, (0, 0, 0), hold1)
+    pygame.draw.rect(screen, (0, 0, 0), hold2)
+    pygame.draw.rect(screen, (0, 0, 0), hold3)
+    pygame.draw.rect(screen, (0, 0, 0), hold4)
+    pygame.draw.rect(screen, (0, 0, 0), hold5)
+    pygame.draw.rect(screen, (0, 255, 0), increase_bet)
+    pygame.draw.rect(screen, (255, 0, 0), decrease_bet)
+    pygame.draw.rect(screen, (0, 0, 255), deal)
+
+    # Draw images
+    screen.blit(card_image_1, (2, 200))
+    screen.blit(card_image_2, (252, 200))
+    screen.blit(card_image_3, (502, 200))
+    screen.blit(card_image_4, (752, 200))
+    screen.blit(card_image_5, (1002, 200))
+
+    # Draw labels
+    screen.blit(held1, (88, 150))
+    screen.blit(held2, (336, 150))
+    screen.blit(held3, (584, 150))
+    screen.blit(held4, (832, 150))
+    screen.blit(held5, (1080, 150))
+    screen.blit(bet_plus, (80, 587))
+    screen.blit(bet_minus, (55, 637))
+    screen.blit(deal_label, (330, 610))
+    screen.blit(win_label, (500, 600))
+
+    # Draw credit label
+    screen.blit(credit_label, (1000, 587))
+
+    # Draw bet label
+    screen.blit(bet_label, (1000, 637))
+
 def create_new_deck():
     deck = []
     for suit in ["H", "D", "C", "S"]:
         for value in range(2, 15): #2-14
             deck.append(Card(suit, value))
     return deck
-
 
 running = True
 while (running):
@@ -290,7 +324,7 @@ while (running):
                     print (payouthand)
                     payout = payouthand[0][bet]
 
-                    print("PAYOUTTT:")
+                    print("PAYOUT:")
                     print(payout)
 
                     credits += payout
@@ -320,76 +354,7 @@ while (running):
     # Draw pay table
     draw_pay_table()
 
-    # Draw buttons
-    pygame.draw.rect(screen, (0, 0, 0), hold1)
-    pygame.draw.rect(screen, (0, 0, 0), hold2)
-    pygame.draw.rect(screen, (0, 0, 0), hold3)
-    pygame.draw.rect(screen, (0, 0, 0), hold4)
-    pygame.draw.rect(screen, (0, 0, 0), hold5)
-    pygame.draw.rect(screen, (0, 255, 0), increase_bet)
-    pygame.draw.rect(screen, (255, 0, 0), decrease_bet)
-    pygame.draw.rect(screen, (0, 0, 255), deal)
-
-    # Draw images
-    screen.blit(card_image_1, (2, 200))
-    screen.blit(card_image_2, (252, 200))
-    screen.blit(card_image_3, (502, 200))
-    screen.blit(card_image_4, (752, 200))
-    screen.blit(card_image_5, (1002, 200))
-
-    # Draw labels
-    screen.blit(held1, (88, 150))
-    screen.blit(held2, (336, 150))
-    screen.blit(held3, (584, 150))
-    screen.blit(held4, (832, 150))
-    screen.blit(held5, (1080, 150))
-    screen.blit(bet_plus, (80, 587))
-    screen.blit(bet_minus, (55, 637))
-    screen.blit(deal_label, (330, 610))
-    screen.blit(win_label, (500, 600))
-
-    # Draw credit label
-    screen.blit(credit_label, (1000, 587))
-
-    # Draw bet label
-    screen.blit(bet_label, (1000, 637))
-
+    # Draw buttons, images and labels
+    draw_components()
 
     pygame.display.flip()
-
-    # # print hand
-    # print(hand)
-
-    # # do button clicking until deal button is clicked
-
-    # # buttons will just change held array to 1 or 0 at index of card
-
-
-    # # deal new cards
-    # for i in range(5):
-    #     if held[i] == 0:
-    #         hand[i] = deck.pop()
-
-    # # idk ui update based off new chards
-
-
-    # #calculate hand
-    # value = funcs.check_hand(hand)
-
-    # # check payout table
-    # payout = payouttableDict[value]
-    # print("PAYOUTTT:")
-    # print(payout)
-
-
-    # uncomment these once loop isn't infinite:
-    ############################################### 
-    # check payout table
-    # payouthand = [payoutTable[value]]
-    # print (hand)
-    # print (payouthand)
-    # payout = payouthand[0][bet]
-
-    # print("PAYOUTTT:")
-    # print(payout)
-    ############################################### 
