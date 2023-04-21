@@ -1,3 +1,6 @@
+# MATH3808 Final Project - Video Poker
+# Authors: Elias Hawa, Sebastian Beimers, Victor Li
+
 import pygame
 
 from card import Card

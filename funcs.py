@@ -1,6 +1,7 @@
-import random
+# MATH3808 Final Project - Video Poker
+# Authors: Elias Hawa, Sebastian Beimers, Victor Li
+
 from collections import defaultdict
-from card import Card
 
 # Given 5 card class objects, determine the best hand
 def check_hand(hand):
