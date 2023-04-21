@@ -234,7 +234,6 @@ while (running):
                     else:
                         held[0] = 0
                         held1.set_alpha(0)
-                print("Button 1 clicked")
             elif hold2.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[1] == 0:
@@ -243,7 +242,6 @@ while (running):
                     else:
                         held[1] = 0
                         held2.set_alpha(0) 
-                print("Button 2 clicked")
             elif hold3.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[2] == 0:
@@ -252,7 +250,6 @@ while (running):
                     else:
                         held[2] = 0
                         held3.set_alpha(0)
-                print("Button 3 clicked")
             elif hold4.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[3] == 0:
@@ -261,7 +258,6 @@ while (running):
                     else:
                         held[3] = 0
                         held4.set_alpha(0) 
-                print("Button 4 clicked")
             elif hold5.collidepoint(event.pos):
                 if game_state == "first_hand":
                     if held[4] == 0:
@@ -270,17 +266,14 @@ while (running):
                     else:
                         held[4] = 0
                         held5.set_alpha(0)
-                print("Button 5 clicked")
             elif increase_bet.collidepoint(event.pos):
                 if game_state == "betting" and bet < 5:
                     bet += 1
                     bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
-                print("Increase bet clicked")
             elif decrease_bet.collidepoint(event.pos):
                 if game_state == "betting" and bet > 1:
                     bet -= 1
                     bet_label = font.render("Bet: " + str(bet), True, (255, 255, 255))
-                print("Decrease bet clicked")
             elif deal.collidepoint(event.pos):
                 if game_state == "betting":
                     credits -= bet
@@ -309,7 +302,6 @@ while (running):
                     for i in range(5):
                         if held[i] == 0:
                             hand[i] = deck.pop()
-                    print(hand[0])
                     card_image_1 = pygame.transform.scale(pygame.image.load("card_images/" + hand[0].file_name()), (250, 363))
                     card_image_2 = pygame.transform.scale(pygame.image.load("card_images/" + hand[1].file_name()), (250, 363))
                     card_image_3 = pygame.transform.scale(pygame.image.load("card_images/" + hand[2].file_name()), (250, 363))
@@ -323,12 +315,7 @@ while (running):
 
                     # check payout table
                     payouthand = [payoutTable[value]]
-                    print (hand)
-                    print (payouthand)
                     payout = payouthand[0][bet]
-
-                    print("PAYOUT:")
-                    print(payout)
 
                     credits += payout
                     credit_label = font.render("Credits: " + str(credits), True, (255, 255, 255))
@@ -343,7 +330,6 @@ while (running):
                     win_label = font.render(funcs.convertNumberToWinner(value), True, (255, 255, 255))
 
                     game_state = "betting"
-                print("Deal clicked")
     # do button clicking until deal button is clicked
 
     # Clear the screen
