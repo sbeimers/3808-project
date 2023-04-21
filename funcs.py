@@ -52,8 +52,7 @@ def convertNumberToWinner(x):
 
 # given a hand of 5 cards, determine if it is a royal flush
 def check_royal_flush (hand):
-    return check_flush(hand) and check_straight(hand) and hand[0].value == 14
-
+    return check_straight_flush(hand) and hand[0].value == 14 and hand[1].value == 13
 
 # given a hand of 5 cards, determine if it is a straight flush
 def check_straight_flush (hand):
